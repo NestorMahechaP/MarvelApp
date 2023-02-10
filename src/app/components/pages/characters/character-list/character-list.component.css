@@ -1,0 +1,86 @@
+.drop{
+    float: right;
+}
+.custom-drop{
+    background-color: #ffffff;
+    border-color: rgb(221, 211, 211);
+    width: 250px;
+    height: 50px;
+    color:black;
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    border-radius: 0px;
+    align-items: center;
+}
+.custom-menu{
+    background-color: #ffffff;
+    border-color: rgb(145, 145, 145);
+    width: 250px;
+    color:black;
+    font-size: medium;
+}
+.dropdown-toggle::after {
+    display: none;
+}
+/* card */
+.container {
+    display: inline-block;
+    width: 400px;
+    margin-right: 150px;
+}
+.container .card {
+    height : 300px;  
+    background-color : #faf9f9;
+    margin : 30px 10px;
+    padding : 20px 15px;
+    width : 400px;
+    box-shadow : 0 1px 2px rgba(238, 234, 234, 0.1);
+    border:none;
+    border-radius: 0px;
+}
+.container .card .image{
+    margin: 5px 0px 0px -30px;
+}
+.container .card .image img {
+    border-radius : 50%;
+    height: 180px;
+    width: 180px;
+    object-fit: cover;
+}
+.header-container{
+    display: flex;
+    margin-top: -35px;
+}
+.detail{
+    padding-left: 20px;
+}
+.detail h2{
+    font-family: Roboto; 
+    font-size: 25px;
+    font-weight: 600;  
+}
+.detail p{
+    font-family: Roboto; 
+    font-size: 14px;
+    margin-top: -6px;
+}
+.detail .btn-danger{
+    background-color:rgb(230, 10, 10);
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 600;
+    font-family: Arial; 
+    font-size: 12px;
+}
+.column {
+    float: left;
+    width: 50%;
+    padding: 2px 5px;
+}
+.comic-name{
+    text-decoration:none;
+    color:rgb(100, 101, 102);
+    font-family: Arial; 
+    font-size: 12px;
+}
