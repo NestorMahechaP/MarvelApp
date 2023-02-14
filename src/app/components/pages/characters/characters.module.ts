@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CharacterDetailsComponent } from '@characters/character-details/character-details.component';
 import { CharacterListComponent } from '@characters/character-list/character-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FavouritesComponent } from './favourites/favourites.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-const myComponents=[CharacterDetailsComponent, CharacterListComponent];
+
+const myComponents=[CharacterListComponent, FavouritesComponent];
 
 @NgModule({
   declarations: [...myComponents],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule,
+    NgbModule
   ],
   exports:[...myComponents]
 })

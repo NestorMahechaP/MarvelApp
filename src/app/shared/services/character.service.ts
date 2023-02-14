@@ -2,15 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import { environment } from '@environment/environment.development';
 import { Character } from '../interfaces/character.interface';
-import { firstValueFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { ResponseObject } from '../interfaces/response.interface';
 
+const favourites : any = [];
 @Injectable({
   providedIn: 'root'
 })
+
 export class CharacterService {
+  private favourite$ = new BehaviorSubject<any>(favourites);
 
   constructor(private http: HttpClient) {}
+
+  get selectedFavourites$(): Observable<any>{
+    return this.favourite$.asObservable();
+  }
+
+  setFavourite(favourite: any){
+    this.favourite$.next(favourite);
+  }
 
   searchCharacters(query='', orderBy=''){
     let path1 = `${environment.baseUrlAPI}?`;
@@ -34,6 +45,10 @@ export class CharacterService {
     return this.http.get<Character>(`${environment.baseUrlAPI}/${id}/comics?${environment.apiKey}`)
   }
 
+  getStories(id:number){
+    return this.http.get<Character>(`${environment.baseUrlAPI}/${id}/series?${environment.apiKey}`)
+  }
+
   getComicDetailsByUrl(urlComic:string){
     return this.http.get(`${urlComic.replace("http","https")}?${environment.apiKey}`);
   }
@@ -52,7 +67,6 @@ export class CharacterService {
         break;
       offset += size;
     }
-    console.log(characterList);
     return characterList;
   }
 

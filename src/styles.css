@@ -1,1 +1,37 @@
 html, body { background-color:rgb(243, 241, 241);}
+
+/* Pagination */
+.custom-pagination li{
+    background-color : #faf9f9;
+    font-weight: 400;
+    color: rgb(175, 170, 170);
+    margin: 5px;
+    box-shadow : 0 3px 5px rgba(43, 42, 42, 0.1);
+}
+.custom-pagination a{
+    text-decoration: none;
+}
+.custom-pagination li.current{
+    font-weight: 500;
+    color: black;
+    background-color: #faf9f9;
+    box-shadow : 0 0px 0px rgba(43, 42, 42, 0.1);
+}
+.custom-pagination li.pagination-previous:not(.disabled), 
+.custom-pagination li.pagination-next:not(.disabled){
+    color: black;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.modal-open .container-fluid,
+.modal-open .container {
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+}
+.modal-content{
+    border-radius: 0px;
+}

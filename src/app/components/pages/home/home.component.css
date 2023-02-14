@@ -1,11 +1,5 @@
-.title{
-    margin-left: -2rem;
-    font-weight: 700;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.title-container{
-    display: inline-block;
-    margin-right: auto;
+.characters-container{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 5rem;
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { CharacterListRoutingModule } from './character-list-routing.module';
 
 
@@ -8,7 +8,8 @@ import { CharacterListRoutingModule } from './character-list-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    CharacterListRoutingModule
+    CharacterListRoutingModule, 
+    NgxPaginationModule
   ]
 })
 export class CharacterListModule { }

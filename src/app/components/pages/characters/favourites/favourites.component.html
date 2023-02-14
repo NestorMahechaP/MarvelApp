@@ -1,0 +1,15 @@
+<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
+    <b class="headerFavourite"><img src="assets/btn-favourites-primary.png"> My favourites</b>
+
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+            <div class="modal-wrap " *ngFor="let img of favourites">
+                <div>
+                    <img  src="{{replaceDefaultImage(img.thumbnail)}}">
+                    <button class="btnDelete" (click)="deleteFavourite(img)"> <img src="assets/btn-delete.png"></button>
+                </div>
+                <h2>{{img.title}}</h2>
+            </div>
+        </div>
+    </div>
+</nav>

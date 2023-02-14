@@ -1,38 +1,120 @@
-<div class="drop">
-  <div class="dropdown">
-    <button class="btn btn-secondary btn-lg dropdown-toggle custom-drop" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Sort By
-      <i class="fa fa-chevron-down"></i>
-    </button>
-    <div class="dropdown-menu custom-menu" aria-labelledby="dropdownMenuButton">
-      <button type="button" class="dropdown-item" (click)="orderAs('name')">Name (A-Z)</button>
-      <button type="button" class="dropdown-item" (click)="orderAs('-name')">Name (Z-A)</button>
-      <button type="button" class="dropdown-item" (click)="orderAs('modified')"> Date (Asc)</button>
-      <button type="button" class="dropdown-item" (click)="orderAs('-modified')"> Date (Des)</button>
-    </div>
-  </div>
-</div>
-<div class="list">
-  <div class="container" *ngFor="let character of characterList">
-    <div class="card">
-      <div class="header-container">
-        <div class="image">
-          <img src={{replaceDefaultImage(character.thumbnail)}}>
-        </div>
-        <div class="detail">
-          <h2>{{character.name}}</h2>
-          <p>{{validateDescription(character.description)}}</p>
-          <button class="btn btn-danger">VIEW MORE</button>
+<div class="principal">
+  <div class="actions-container">
+    <div class="title-container">
+            <h2 class="title">
+            <img src="assets/characters.png"> 
+              Characters
+            </h2>
+        </div>  
+    <div class="drop">
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-lg dropdown-toggle custom-drop" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{keyOption}}
+          <i class="fa fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu custom-menu" aria-labelledby="dropdownMenuButton">
+          <button type="button" class="dropdown-item" (click)="orderAs('name')">Name (A-Z)</button>
+          <button type="button" class="dropdown-item" (click)="orderAs('-name')">Name (Z-A)</button>
+          <button type="button" class="dropdown-item" (click)="orderAs('modified')"> Date (Asc)</button>
+          <button type="button" class="dropdown-item" (click)="orderAs('-modified')"> Date (Des)</button>
         </div>
       </div>
-      <div class="comics">
-        <h3>Related comics</h3>
-        <div try *ngFor="let item of comicArrays(character); let i = index">
-          <div class="column">
-            <a class="comic-name" *ngIf="i<4">{{validateComic(item)}}</a>
+    </div>
+  </div>
+  <div class="list">
+    <div class="container" *ngFor="let character of characterList | paginate: config">
+      <div class="card">
+        <div class="header-container">
+          <div class="image">
+            <img src={{replaceDefaultImage(character.thumbnail)}}>
+          </div>
+          <div class="detail">
+            <h2>{{character.name}}</h2>
+            <p>{{validateDescription(character.description)}}</p>
+            <button class="btn btn-danger" (click)="modalCharacter(character.id, characterModal)">VIEW MORE</button>
+          </div>
+        </div>
+        <div class="comics">
+          <h3>Related comics</h3>
+          <div try *ngFor="let item of comicArrays(character); let i = index">
+            <div class="column">
+              <button class="comic-name" *ngIf="i<4" (click)="modalComic(item.resourceURI, comicModal)">{{validateComic(item?.name)}}</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="custom-pagination">
+      <pagination-controls
+        [maxSize]="6"
+        [previousLabel]="labels.previousLabel"
+        [nextLabel]="labels.nextLabel"
+        [responsive]="true"
+        (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
   </div>
+</div>
+
+
+<!-- Comic Modal -->
+<ng-template #comicModal let-modal>
+  <div class="comic-header">
+    <button type="button" class="btnClose" aria-label="Close" (click)="modal.dismiss('Cross click')"> <img src="./assets/btn-close.png"> </button>
+  </div>
+  <div class="modal-wrap">
+    <h1 class="title">
+      <img src="{{comic[0].thumbnail.path}}.{{comic[0].thumbnail.extension}}"> {{comic[0].title}}
+    </h1>
+    <p class="description">{{comic[0].description}}</p>
+  </div>
+  <div>
+    <button type="button" class="btn-add" [ngClass]="{'color1':btncolAdd, 'color2':!btncolAdd}"  (click)="addFavorites()"> <img src={{btnImgAdd}}> {{titlebutton}}</button>
+    <button type="button" class="btn-car" > <img src="assets/shopping-cart-primary.png"> BUY FOR ${{comic[0].prices[0].price}}</button>
+  </div>
+  <div class="preloader" *ngIf="loading">
+    <span class="loader"></span>
+  </div>
+</ng-template>
+
+<!-- Character Modal -->
+<ng-template #characterModal let-modal>
+  <div class="comic-header">
+    <button type="button" class="btnClose" aria-label="Close" (click)="modal.dismiss('Cross click')"> <img src="assets/btn-close.png"> </button>
+  </div>
+  <div class="modal-wrap">
+    <h1 class="title">
+      {{character[0].name}}
+    </h1>
+    <p class="description image-back">{{character[0].description}}</p>
+  </div>
+  <div>
+    <div id="carouselExample" class="carousel carousel-dark slide">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let item of characterComic; first as isFirst" [ngClass]="{'active':isFirst}">
+          <div>
+            <img src="{{item.thumbnail.path}}.{{item.thumbnail.extension}}"> 
+            <h1>{{item.title}}</h1>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn-car" [ngClass]="{'selected':!display}" (click)="changeState(displayId,characterModal)"><i class="fa fa-leanpub fa-2x"></i> COMICS</button>
+    <button type="button" class="btn-car" [ngClass]="{'selected':display}" (click)="changeState(displayId,characterModal)"><i class="fa fa-grav fa-2x"></i> STORIES</button>
+  </div>
+  <div class="preloader" *ngIf="loading">
+    <span class="loader"></span>
+  </div>
+</ng-template>
+<div class="preloader" *ngIf="loading">
+  <span class="loader"></span>
 </div>
