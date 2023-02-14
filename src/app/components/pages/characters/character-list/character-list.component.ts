@@ -198,7 +198,7 @@ export class CharacterListComponent implements OnInit{
       this.titlebutton="ADDED TO FAVOURITES";
       this.favourites.push(this.comic[0]);
       this.characterService.setFavourite(this.favourites);
-      this.toastr.success('Comic Favourites', 'Added', {timeOut:2000})
+      this.toastr.success('Favourites comic', 'Added', {timeOut:2000})
     } else{
       this.btnImgAdd="assets/btn-favourites-default.png";
       this.titlebutton="ADD TO FAVOURITES";
@@ -216,7 +216,7 @@ export class CharacterListComponent implements OnInit{
       if(index>-1)
       {
         this.favourites.splice(index,1)
-        this.toastr.info('Comic Favourites', 'Deleted', {timeOut:2000})
+        this.toastr.info('Favourites comic', 'Deleted', {timeOut:2000})
       }
     }
     this.save(this.favourites);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '@app/shared/services/character.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favourites',
@@ -7,7 +8,7 @@ import { CharacterService } from '@app/shared/services/character.service';
   styleUrls: ['./favourites.component.css']
 })
 export class FavouritesComponent implements OnInit{
-  constructor(private characterService : CharacterService){}
+  constructor(private characterService : CharacterService, private toastr:ToastrService){}
 
   favourites: any=[];
 
@@ -32,7 +33,7 @@ export class FavouritesComponent implements OnInit{
     if(index>-1)
     {
       this.favourites.splice(index,1)
-      // this.toastr.info('Comic Favourites', 'DELETED', {timeOut:2000})
+      this.toastr.info('Favourite comic', 'DELETED', {timeOut:2000})
     }
     this.save(this.favourites);
     this.characterService.setFavourite(this.favourites);
