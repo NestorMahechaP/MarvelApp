@@ -1,3 +1,28 @@
+@media screen and (min-width: 800px){
+  form {
+    color: #555;
+    display: flex;
+    width: 400px;
+    padding: 2px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    background-color: rgb(255, 252, 252);
+    margin-right: 250px;
+  }
+}
+@media screen and (max-width: 800px) and (min-width: 600px){
+  form {
+    color: #555;
+    display: flex;
+    width: 300px;
+    padding: 2px;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    background-color: rgb(255, 252, 252);
+    margin-right: 100px;
+  }
+}
+@media screen and (max-width: 600px){
   form {
     color: #555;
     display: flex;
@@ -8,6 +33,7 @@
     background-color: rgb(255, 252, 252);
     margin-right: 30px;
   }
+}
   input[type="search"] {
     border: none;
     background: transparent;

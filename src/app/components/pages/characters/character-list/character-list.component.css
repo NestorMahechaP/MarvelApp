@@ -24,13 +24,19 @@
 @media screen and (min-width: 800px){
     .drop{
         margin-left: auto;
-        margin-right: 200px;
+        margin-right: 220px;
     }
 }
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) and (min-width: 600px){
     .drop{
         margin-left: auto;
         margin-right: 100px;
+    }
+}
+@media screen and (max-width: 600px){
+    .drop{
+        margin-left: auto;
+        margin-right: 10px;
     }
 }
 .custom-drop{
@@ -73,7 +79,7 @@
 .container {
     display: inline-block;
     width: 430px;
-    margin-right: 80px;
+    margin-right: 50px;
 }
 .container .card {
     height : 300px;  
