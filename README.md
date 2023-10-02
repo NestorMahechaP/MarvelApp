@@ -1,6 +1,6 @@
 # MarvelChallengeApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1. Consume the marvel api to display the heroes' information in an organized way.
 
 ## Development server
 
